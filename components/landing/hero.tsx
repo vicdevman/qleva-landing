@@ -4,12 +4,24 @@ import * as React from "react";
 
 import Image from "next/image";
 
+import { useTheme } from "next-themes";
+
 import { Search, Sparkles } from "lucide-react";
 
 import { FadeIn } from "@/components/motion/fade-in";
 import { Button } from "../ui/button";
 
 function TypingChat() {
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const currentTheme = mounted ? resolvedTheme ?? theme : undefined;
+  const isDark = currentTheme === "dark";
+
   const prompts = React.useMemo(
     () => [
       "Find an agent that monitors my token liquidity and alerts me",
@@ -70,32 +82,29 @@ function TypingChat() {
 
   return (
     <div className="mx-auto mt-8 w-full max-w-2xl">
-      <div className="flex w-full items-center gap-3 rounded-full border border-foreground/10 bg-surface px-3 py-2 sm:px-4 sm:pr-2">
-       <Image
-                src="/qleva-brand-kit/qleva-logo-black.png"
-                alt="Qleva"
-                width={24}
-                height={24}
-                className="block dark:hidden"
-                priority
-              />
-              <Image
-                src="/qleva-brand-kit/qleva-logo-white.png"
-                alt="Qleva"
-                width={24}
-                height={24}
-                className="hidden dark:block"
-                priority
-              />
-        <div className="min-w-0 flex-1 text-left text-sm text-foreground/70">
-          <span className="block w-full max-w-[16rem] sm:max-w-none sm:w-[28rem] md:w-[34rem] whitespace-pre-wrap break-words text-foreground">
+      <div className="flex w-full items-center gap-3 rounded-full border border-foreground/10 bg-surface p-2.5">
+        <div className="bg-foreground/10 p-3 rounded-full">
+        <Image
+          src={
+            isDark
+              ? "/qleva-brand-kit/qleva-logo-white.png"
+              : "/qleva-brand-kit/qleva-logo-black.png"
+          }
+          alt="Qleva"
+          width={24}
+          height={24}
+          priority
+        />
+        </div>
+        <div className="min-w-0 flex-1 text-left text-sm text-foreground/70 ml-1">
+          <span className="block w-[16rem] max-w-full sm:w-[28rem] md:w-[34rem] whitespace-pre-wrap break-words text-foreground">
             {text}
-            <span className="ml-1 inline-block w-[8px] animate-pulse text-foreground/70">
+            <span className="ml-0.5 inline-block w-[8px] animate-pulse text-foreground/70">
               |
             </span>
           </span>
         </div>
-        <Button className="h-9 whitespace-nowrap px-3 text-xs sm:h-10 sm:px-4 sm:text-sm">
+        <Button className="h-9 whitespace-nowrap px-3 text-xs sm:h-10 sm:px-4 sm:text-sm py-6">
           Launch App
         </Button>
       </div>
@@ -116,7 +125,7 @@ export function Hero() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <p className="mt-5 max-w-xl text-pretty text-center text-md leading-8 text-foreground/70">
+            <p className="mt-5 max-w-xl text-pretty text-center text-md leading text-foreground/70">
               The easiest way to discover, hire, and monitor real on-chain AI
               agents on Base. Chat in plain English, hire with one tap
             </p>
@@ -128,7 +137,7 @@ export function Hero() {
 
       
         </div>
-    <FadeIn delay={0.2}>
+    {/* <FadeIn delay={0.2}>
             <div className="mt-0 grid grid-cols-3 w-full justify-between gap-2 text-sm text-foreground/70">
               <div className="bg-surface p-4 rounded-2xl border border-foreground/10">
                 <div className="text-xl font-semibold text-foreground">
@@ -149,7 +158,9 @@ export function Hero() {
                 Monitoring & tasks
               </div>
             </div>
-          </FadeIn>
+          </FadeIn> */}
+
+
         {/* <FadeIn className="relative z-10">
           <div className="rounded-3xl border border-foreground/10 bg-background/50 p-4 backdrop-blur-xl">
             <div className="rounded-2xl border border-foreground/10 bg-background/70 p-5">
