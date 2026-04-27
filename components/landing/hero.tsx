@@ -81,9 +81,9 @@ function TypingChat() {
   }, [isDeleting, promptIndex, prompts, text]);
 
   return (
-    <div className="mx-auto mt-8 w-full max-w-2xl">
+    <div className="mx-auto mt-8 w-full max-w-2xl px-4">
       <div className="flex w-full items-center gap-3 rounded-full border border-foreground/10 bg-surface p-2">
-        <div className="bg-foreground/10 p-3 rounded-full">
+        <div className="bg-foreground/10 p-3 rounded-full shrink-0">
         <Image
           src={
             isDark
@@ -96,15 +96,15 @@ function TypingChat() {
           priority
         />
         </div>
-        <div className="min-w-0 flex-1 text-left text-sm text-foreground/70 ml-1">
-          <span className="block w-[16rem] max-w-full sm:w-[28rem] md:w-[34rem] whitespace-pre-wrap break-words text-foreground">
+        <div className="min-w-0 flex-1 text-left text-sm text-foreground/70">
+          <span className="block w-56 sm:w-96 md:w-[32rem] whitespace-pre-wrap wrap-break-word text-foreground">
             {text}
-            <span className="ml-0.5 inline-block w-[8px] animate-pulse text-foreground/70">
+            <span className="ml-0.5 inline-block w-2 animate-pulse text-foreground/70">
               |
             </span>
           </span>
         </div>
-        <Button className="h-9 whitespace-nowrap px-4 text-xs sm:h-10 sm:px-4 sm:text-sm py-6">
+        <Button className="h-9 whitespace-nowrap px-4 text-xs sm:h-10 sm:px-4 sm:text-sm shrink-0">
           Launch App
         </Button>
       </div>
@@ -116,7 +116,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden">
 
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-6 pb-20 pt-22 md:pb-28 md:pt-30">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-4 pb-20 pt-22 md:pb-28 md:pt-30">
         <div className="relative z-10 w-full flex items-center flex-col">
           <FadeIn delay={0.05}>
             <h1 className="mt-6 text-balance text-4xl text-center font-medium leading-tighter tracking-tight md:text-6xl">
@@ -125,7 +125,7 @@ export function Hero() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <p className="mt-5 max-w-xl text-pretty text-center text-md leading text-foreground/70">
+            <p className="mt-5 max-w-xl text-pretty text-center text-sm md:text-md leading text-foreground/70">
               The easiest way to discover, hire, and monitor real on-chain AI
               agents on Base. Chat in plain English, hire with one tap
             </p>

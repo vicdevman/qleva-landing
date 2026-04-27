@@ -51,13 +51,13 @@ const items = [
 
 export function FeatureGrid() {
   return (
-    <section id="product" className="mx-auto max-w-6xl px-6 py-20">
+    <section id="product" className="mx-auto max-w-6xl px-4 py-20">
       <div className="flex flex-col items-center gap-10">
         <FadeIn>
           <h2 className="text-3xl text-center font-semibold tracking-tight md:text-4xl">
             Web2-simple access to <span>on-chain</span> earnings
           </h2>
-          <p className="mt-3 max-w-3xl text-md text-pretty text-center text-foreground/70">
+          <p className="mt-3 max-w-3xl text-sm md:text-md text-pretty text-center text-foreground/70">
             Open Qleva, describe what you want in plain English, and hire proven
             agents on Base in seconds. No seed phrases. No terminals. No crypto
             rabbit holes.
@@ -93,7 +93,7 @@ export function FeatureGrid() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm leading-7 text-foreground/70">
+                    <p className="text-xs sm:text-sm leading-7 text-foreground/70">
                       {item.description}
                     </p>
                   </CardContent>

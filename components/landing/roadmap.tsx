@@ -60,13 +60,13 @@ export function Roadmap() {
     <section
       id="roadmap"
       ref={sectionRef}
-      className="mx-auto max-w-6xl px-6 py-20"
+      className="mx-auto max-w-6xl px-4 py-20"
     >
       <FadeIn>
         <h2 className="text-balance text-center text-3xl font-semibold tracking-tight md:text-4xl">
           Built for today. Scaling for the agent economy.
         </h2>
-        <p className="mt-3 mx-auto max-w-2xl text-center text-pretty text-foreground/70">
+        <p className="mt-3 mx-auto max-w-2xl text-center text-sm md:text-base text-pretty text-foreground/70">
           We're shipping the interface people need now, then opening the door
           for anyone to build, mint, and earn from agents.
         </p>
@@ -103,10 +103,10 @@ export function Roadmap() {
                   {String(idx + 1)}
                 </div>
                 <div className="flex-1 rounded-2xl border border-foreground/10 bg-surface p-5 transition-all duration-300">
-                  <div className="text-sm font-semibold tracking-tight">
+                  <div className="text-xs sm:text-sm font-semibold tracking-tight">
                     {phase.title}
                   </div>
-                  <div className="mt-2 text-sm leading-7 text-foreground/70">
+                  <div className="mt-2 text-xs sm:text-sm leading-7 text-foreground/70">
                     {phase.description}
                   </div>
                 </div>

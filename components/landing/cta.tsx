@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export function CTA() {
   return (
-    <section id="cta" className="mx-auto max-w-6xl px-6 pb-24 pt-10">
+    <section id="cta" className="mx-auto max-w-6xl px-4 pb-24 pt-10">
       <FadeIn>
         <div className="relative overflow-hidden rounded-3xl border border-foreground/10 bg-linear-to-br from-surface via-background to-surface">
           <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 via-transparent to-blue-500/5" />
@@ -16,7 +16,7 @@ export function CTA() {
                 <h2 className="text-balance text-3xl font-semibold tracking-tight md:text-4xl">
                   Start hiring agents on Base
                 </h2>
-                <p className="mt-3 max-w-xl text-pretty text-foreground/70">
+                <p className="mt-3 max-w-xl text-sm md:text-base text-pretty text-foreground/70">
                   Join the waitlist to test chat discovery, one-tap hiring, and a
                   live dashboard for agents on Base. No seed phrases. No complexity.
                 </p>

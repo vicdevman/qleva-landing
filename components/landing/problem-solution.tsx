@@ -16,12 +16,12 @@ const after = [
 
 export function ProblemSolution() {
   return (
-    <section id="why" className="mx-auto max-w-5xl px-6 py-20">
+    <section id="why" className="mx-auto max-w-5xl px-4 py-20">
       <FadeIn>
         <h2 className="text-balance text-center text-3xl font-semibold tracking-tight md:text-4xl">
           Why most people miss out
         </h2>
-        <p className="mt-3 mx-auto max-w-2xl text-center text-pretty text-foreground/70">
+        <p className="mt-3 mx-auto max-w-2xl text-center text-sm md:text-base text-pretty text-foreground/70">
           On-chain agents already earn, trade, research, and automate work on Base, but the experience
           still feels like developer tooling.
         </p>
@@ -33,7 +33,7 @@ export function ProblemSolution() {
             <h3 className="mt-6 text-center text-2xl font-light">Before Qleva</h3>
             <div className="mt-6 flex w-full flex-col gap-4">
               {before.map((label) => (
-                <p key={label} className="flex gap-2 text-sm font-medium text-foreground/70">
+                <p key={label} className="flex gap-2 text-xs sm:text-sm font-medium text-foreground/70">
                   <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-foreground/20 p-1">
                     <X className="h-3 w-3" />
                   </div>
@@ -49,7 +49,7 @@ export function ProblemSolution() {
             <h3 className="mt-6 text-center text-2xl font-light">With Qleva</h3>
             <div className="mt-6 flex w-full flex-col gap-4">
               {after.map((label) => (
-                <p key={label} className="flex gap-2 text-sm font-medium text-foreground/70">
+                <p key={label} className="flex gap-2 text-xs sm:text-sm font-medium text-foreground/70">
                   <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-500 p-1 text-white">
                     <Check className="h-3 w-3" />
                   </div>
