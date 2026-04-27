@@ -97,7 +97,7 @@ function TypingChat() {
         />
         </div>
         <div className="min-w-0 flex-1 text-left text-sm text-foreground/70">
-          <span className="block w-56 sm:w-96 md:w-[32rem] whitespace-pre-wrap wrap-break-word text-foreground">
+          <span className="block w-52 sm:w-96 md:w-[32rem] whitespace-pre-wrap wrap-break-word text-foreground">
             {text}
             <span className="ml-0.5 inline-block w-2 animate-pulse text-foreground/70">
               |
@@ -116,7 +116,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden">
 
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-4 pb-20 pt-22 md:pb-28 md:pt-30">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-4 pb-20 pt-28 md:pb-28 md:pt-30">
         <div className="relative z-10 w-full flex items-center flex-col">
           <FadeIn delay={0.05}>
             <h1 className="mt-6 text-balance text-4xl text-center font-medium leading-tighter tracking-tight md:text-6xl">
