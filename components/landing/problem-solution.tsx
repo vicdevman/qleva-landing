@@ -1,64 +1,67 @@
+import { Check, X } from "lucide-react";
+
 import { FadeIn } from "@/components/motion/fade-in";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
+const before = [
+  "You’re forced into wallets, jargon, and setup before you see results.",
+  "No simple way to compare reputation, performance, and cost.",
+  "Hiring and monitoring are fragmented across tabs and explorers.",
+];
+
+const after = [
+  "Chat in plain English to find the best agents for your goal.",
+  "Hire instantly with gasless payments and smart-wallet safety.",
+  "Monitor performance, costs, and outcomes — like a modern SaaS.",
+];
 
 export function ProblemSolution() {
   return (
-    <section id="why" className="mx-auto max-w-6xl px-6 py-20">
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <FadeIn>
-          <Card className="h-full">
-            <CardHeader>
-              <h3 className="text-xl font-semibold tracking-tight">
-                The problem
-              </h3>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm leading-7 text-foreground/70">
-                Base already hosts thousands of live ERC-8004 agents with real
-                activity — but they’re inaccessible to most people.
-              </p>
-              <div className="mt-6 space-y-3 text-sm text-foreground/70">
-                <div className="rounded-2xl border border-foreground/10 bg-background/60 px-4 py-3">
-                  Requires CLI knowledge, wallet setup, and developer skills.
-                </div>
-                <div className="rounded-2xl border border-foreground/10 bg-background/60 px-4 py-3">
-                  No central hub to trust, monitor, or manage performance.
-                </div>
-                <div className="rounded-2xl border border-foreground/10 bg-background/60 px-4 py-3">
-                  Building agents still locks out non-technical creators.
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+    <section id="why" className="mx-auto max-w-5xl px-6 py-20">
+      <FadeIn>
+        <h2 className="text-balance text-center text-3xl font-semibold tracking-tight md:text-4xl">
+          Why most people miss out
+        </h2>
+        <p className="mt-3 mx-auto max-w-2xl text-center text-pretty text-foreground/70">
+          On-chain agents already earn, trade, research, and automate work on Base, but the experience
+          still feels like developer tooling.
+        </p>
+      </FadeIn>
+
+      <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
+        <FadeIn delay={0.05}>
+          <div className="flex h-full flex-col items-center rounded-t-3xl bg-linear-to-b from-surface to-background p-6">
+            <h3 className="mt-6 text-center text-2xl font-light">Before Qleva</h3>
+            <div className="mt-6 flex w-full flex-col gap-4">
+              {before.map((label) => (
+                <p key={label} className="flex gap-2 text-sm font-medium text-foreground/70">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-foreground/20 p-1">
+                    <X className="h-3 w-3" />
+                  </div>
+                  {label}
+                </p>
+              ))}
+            </div>
+          </div>
         </FadeIn>
 
-        <FadeIn delay={0.05}>
-          <Card className="h-full">
-            <CardHeader>
-              <h3 className="text-xl font-semibold tracking-tight">
-                The solution
-              </h3>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm leading-7 text-foreground/70">
-                Qleva provides a clean, Web2-style layer for the agentic web —
-                discovery, hiring, and management today, and creation tomorrow.
-              </p>
-              <div className="mt-6 space-y-3 text-sm text-foreground/70">
-                <div className="rounded-2xl border border-foreground/10 bg-background/60 px-4 py-3">
-                  Chat-powered discovery via live subgraph data.
-                </div>
-                <div className="rounded-2xl border border-foreground/10 bg-background/60 px-4 py-3">
-                  One-tap hiring via micropayments + Smart Wallets.
-                </div>
-                <div className="rounded-2xl border border-foreground/10 bg-background/60 px-4 py-3">
-                  A dashboard to monitor, manage, and iterate continuously.
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        <FadeIn delay={0.1}>
+          <div className="flex h-full flex-col items-center rounded-t-3xl  bg-linear-to-b from-blue-500/10 to-background p-6">
+            <h3 className="mt-6 text-center text-2xl font-light">With Qleva</h3>
+            <div className="mt-6 flex w-full flex-col gap-4">
+              {after.map((label) => (
+                <p key={label} className="flex gap-2 text-sm font-medium text-foreground/70">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-500 p-1 text-white">
+                    <Check className="h-3 w-3" />
+                  </div>
+                  {label}
+                </p>
+              ))}
+            </div>
+          </div>
         </FadeIn>
       </div>
     </section>
   );
 }
+
+

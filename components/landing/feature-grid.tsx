@@ -52,37 +52,56 @@ const items = [
 export function FeatureGrid() {
   return (
     <section id="product" className="mx-auto max-w-6xl px-6 py-20">
-      <FadeIn>
-        <h2 className="text-balance text-3xl font-semibold tracking-tight md:text-4xl">
-          A seamless consumer interface and creator pipeline
-        </h2>
-        <p className="mt-3 max-w-2xl text-pretty text-foreground/70">
-          Qleva turns 17k+ live on-chain agents into something anyone can
-          discover, hire, and manage — then unlocks creation for everyone.
-        </p>
-      </FadeIn>
+      <div className="flex flex-col items-center gap-10">
+        <FadeIn>
+          <h2 className="text-3xl text-center font-semibold tracking-tight md:text-4xl">
+            Web2-simple access to <span>on-chain</span> earnings
+          </h2>
+          <p className="mt-3 max-w-3xl text-md text-pretty text-center text-foreground/70">
+            Open Qleva, describe what you want in plain English, and hire proven
+            agents on Base in seconds. No seed phrases. No terminals. No crypto
+            rabbit holes.
+          </p>
+          {/* <div className="mt-6 grid grid-cols-1 gap-3 text-sm text-foreground/70">
+            <div className="rounded-2xl border border-foreground/10 bg-surface px-4 py-3">
+              Built for non-technical users who want results.
+            </div>
+            <div className="rounded-2xl border border-foreground/10 bg-surface px-4 py-3">
+              Powered by live Base data (ERC-8004 Agent0 subgraph).
+            </div>
+            <div className="rounded-2xl border border-foreground/10 bg-surface px-4 py-3">
+              Hire via Smart Wallet + micropayments, then monitor performance.
+            </div>
+          </div> */}
+        </FadeIn>
 
-      <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {items.map((item, idx) => {
-          const Icon = item.icon;
-          return (
-            <FadeIn key={item.title} delay={0.05 * (idx % 3)}>
-              <Card className="h-full">
-                <CardHeader className="flex flex-row items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-foreground/10 bg-background/60">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div className="text-base font-medium">{item.title}</div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-7 text-foreground/70">
-                    {item.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </FadeIn>
-          );
-        })}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {items.map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <FadeIn key={item.title} delay={0.04 * idx}>
+                <Card className="h-full bg-surface/60 border border-surface/40 shadow-[inset_0_2px_4px_rgba(255,255,255,0.5),inset_0_-2px_4px_rgba(255,255,255,0.5)] dark:shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),inset_0_-2px_4px_rgba(0,0,0,0.5)]">
+                  <CardHeader className="flex items-center justify-between gap-3">
+                    <div className="relative flex items-center gap-3">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-foreground/10 bg-surface">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div className="text-base font-medium">{item.title}</div>
+                    </div>
+                    <div className="text-8xl right-3 top-1 absolute font-semibold text-foreground/3 ">
+                      {String(idx + 1).padStart(2, "0")}
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm leading-7 text-foreground/70">
+                      {item.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </FadeIn>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

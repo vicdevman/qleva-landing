@@ -24,10 +24,10 @@ function TypingChat() {
 
   const prompts = React.useMemo(
     () => [
-      "Find an agent that monitors my token liquidity and alerts me",
-      "Hire an agent to summarize governance proposals weekly",
-      "Discover an agent that executes tasks with micropayments",
-      "Build a no-code ERC-8004 agent for customer support (coming soon)",
+      "Help me keep an eye on my token balance",
+      "Alert me weekly about new governance proposals",
+      "Hire an agent to automate my tasks with payments",
+      "Build a tool to manage customer support quickly",
     ],
     [],
   );
@@ -82,7 +82,7 @@ function TypingChat() {
 
   return (
     <div className="mx-auto mt-8 w-full max-w-2xl">
-      <div className="flex w-full items-center gap-3 rounded-full border border-foreground/10 bg-surface p-2.5">
+      <div className="flex w-full items-center gap-3 rounded-full border border-foreground/10 bg-surface p-2">
         <div className="bg-foreground/10 p-3 rounded-full">
         <Image
           src={
@@ -104,7 +104,7 @@ function TypingChat() {
             </span>
           </span>
         </div>
-        <Button className="h-9 whitespace-nowrap px-3 text-xs sm:h-10 sm:px-4 sm:text-sm py-6">
+        <Button className="h-9 whitespace-nowrap px-4 text-xs sm:h-10 sm:px-4 sm:text-sm py-6">
           Launch App
         </Button>
       </div>
@@ -116,7 +116,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden">
 
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-6 pb-20 pt-12 md:pb-28 md:pt-16">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-6 pb-20 pt-22 md:pb-28 md:pt-30">
         <div className="relative z-10 w-full flex items-center flex-col">
           <FadeIn delay={0.05}>
             <h1 className="mt-6 text-balance text-4xl text-center font-medium leading-tighter tracking-tight md:text-6xl">
