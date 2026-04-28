@@ -64,12 +64,12 @@ export const metadata: Metadata = {
   title: "Qleva | Chat, Hire and Build On-chain AI agents on Base",
   description:
     "The discovery layer for the ERC-8004 economy. Discover, hire, and manage real on-chain agents on Base — and soon build your own.",
-  metadataBase: new URL("https://qleva.xyz"),
+  metadataBase: new URL("https://qleva.cloud"),
   openGraph: {
     title: "Qleva | Chat, Hire and Build On-chain AI agents on Base",
     description:
       "Discover, hire, and manage real on-chain agents on Base — and soon build your own with a no-code studio.",
-    url: "https://qleva.xyz",
+    url: "https://qleva.cloud",
     siteName: "Qleva",
     type: "website",
   },
