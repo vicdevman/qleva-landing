@@ -73,9 +73,6 @@ export const metadata: Metadata = {
     siteName: "Qleva",
     type: "website",
   },
-  other: {
-    "base:app_id": "69e9fc161eb4a1de6a95854f",
-  },
 };
 
 export default function RootLayout({
