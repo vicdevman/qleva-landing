@@ -1,79 +1,9 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Inter } from "next/font/google";
+import { ThemeProvider } from "next-themes";
 import "./globals.css";
 
-import { ThemeProvider } from "@/components/theme-provider";
-
-const coinbaseSans = localFont({
-  variable: "--font-sans",
-  src: [
-    {
-      path: "../public/qleva-brand-kit/font-sans/Coinbase_Sans-Extra_Light-web-1.32.woff2",
-      weight: "200",
-      style: "normal",
-    },
-    {
-      path: "../public/qleva-brand-kit/font-sans/Coinbase_Sans-Extra_Light_Italic-web-1.32.woff2",
-      weight: "200",
-      style: "italic",
-    },
-    {
-      path: "../public/qleva-brand-kit/font-sans/Coinbase_Sans-Light-web-1.32.woff2",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../public/qleva-brand-kit/font-sans/Coinbase_Sans-Light_Italic-web-1.32.woff2",
-      weight: "300",
-      style: "italic",
-    },
-    {
-      path: "../public/qleva-brand-kit/font-sans/Coinbase_Sans-Regular-web-1.32.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/qleva-brand-kit/font-sans/Coinbase_Sans-Regular_Italic-web-1.32.woff2",
-      weight: "400",
-      style: "italic",
-    },
-    {
-      path: "../public/qleva-brand-kit/font-sans/Coinbase_Sans-Medium-web-1.32.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../public/qleva-brand-kit/font-sans/Coinbase_Sans-Medium_Italic-web-1.32.woff2",
-      weight: "500",
-      style: "italic",
-    },
-    {
-      path: "../public/qleva-brand-kit/font-sans/Coinbase_Sans-Bold-web-1.32.woff2",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../public/qleva-brand-kit/font-sans/Coinbase_Sans-Bold_Italic-web-1.32.woff2",
-      weight: "700",
-      style: "italic",
-    },
-  ],
-});
-
-export const metadata: Metadata = {
-  title: "Qleva | Chat, Hire and Build On-chain AI agents on Base",
-  description:
-    "The discovery layer for the ERC-8004 economy. Discover, hire, and manage real on-chain agents on Base — and soon build your own.",
-  metadataBase: new URL("https://qleva.cloud"),
-  openGraph: {
-    title: "Qleva | Chat, Hire and Build On-chain AI agents on Base",
-    description:
-      "Discover, hire, and manage real on-chain agents on Base — and soon build your own with a no-code studio.",
-    url: "https://qleva.cloud",
-    siteName: "Qleva",
-    type: "website",
-  },
-};
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export default function RootLayout({
   children,
@@ -81,13 +11,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${coinbaseSans.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-white/10">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
         </ThemeProvider>
       </body>

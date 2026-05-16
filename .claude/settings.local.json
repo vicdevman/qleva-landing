@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\User\\\\OneDrive\\\\Desktop\\\\web3\\\\qleva\\\\qleva-landing\\\\public\" -Recurse -File)",
+      "Bash(Select-Object FullName)"
+    ]
+  }
+}
