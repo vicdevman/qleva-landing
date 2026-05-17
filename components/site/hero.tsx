@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, Send, Paperclip, Bot, AtSign } from "lucide-react";
+import TextType from "@/components/ui/text-type";
 
 export function Hero() {
   return (
@@ -76,10 +77,21 @@ export function Hero() {
         <div className="p-4 md:p-5 rounded-2xl bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 shadow-2xl relative text-left group">
           <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/5 pointer-events-none" />
           
-          <div className="mb-8 md:mb-10">
-            <p className="text-gray-400 text-lg font-light tracking-tight">
-              Buy <span className="text-white">$20</span> of <span className="text-white">ETH</span> every Friday at 10:00 AM UTC...<span className="inline-block w-0.5 h-5 bg-primary ml-1 animate-pulse align-middle" />
-            </p>
+          <div className="mb-8 md:mb-10 min-h-[32px] flex items-center">
+            <TextType
+              text={[
+                "Buy $20 of ETH every Friday at 10:00 AM UTC...",
+                "Swap 100 USDC for BASE when gas is below 15 gwei...",
+                "Alert me when ETH crosses $4,000 and stake 1 ETH...",
+                "Claim pending airdrops across all L2 networks..."
+              ]}
+              typingSpeed={40}
+              deletingSpeed={20}
+              pauseDuration={2500}
+              className="text-gray-300 text-lg font-light tracking-tight"
+              cursorClassName="w-0.5 h-5 bg-primary ml-1 align-middle inline-block"
+              cursorCharacter=""
+            />
           </div>
 
           <div className="flex items-center justify-between pt-4 border-t border-white/5">

@@ -26,28 +26,45 @@ export function FeaturesTrustedBy() {
   ];
 
   return (
-    <section className="relative w-full min-h-[400px] flex flex-col items-center justify-center overflow-hidden bg-[#030303] border-y border-white/5 py-16">
-      {/* 1. Background Radial Gradient: Central powerful pool of golden-yellow light fading to dark void */}
+    <section className="relative w-full min-h-[300px] flex flex-col items-center justify-center bg-black border-b border-white/5 py-16">
+      {/* 1. Background Radial Gradient: Central powerful pool of golden-yellow light blending up into the Hero section */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.15]" 
+        className="absolute left-0 right-0 -top-[150px] md:-top-[250px] h-[600px] md:h-[800px] pointer-events-none opacity-[0.2]" 
         style={{
           background: "radial-gradient(ellipse 50% 50% at 50% 50%, var(--color-primary) 0%, transparent 100%)"
         }}
       />
 
       {/* 2. Logo Marquee Motion & Gradient Mask Integration */}
-      <div className="relative z-10 mt-16 w-full flex justify-center overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,black_50%,transparent_100%)]">
+      <div className="relative z-10 mt-16 w-[90%] md:w-1/2 mx-auto flex overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,black_50%,transparent_100%)]">
         <motion.div
-          animate={{ x: ["0%", "-50%"] }}
+          animate={{ x: ["0%", "-100%"] }}
           transition={{
             repeat: Infinity,
             ease: "linear",
-            duration: 40,
+            duration: 30,
           }}
-          className="flex items-center gap-16 md:gap-24 px-8 w-max"
+          className="flex shrink-0 items-center gap-16 md:gap-24 pr-16 md:pr-24 w-max"
         >
-          {/* Duplicated for seamless infinite looping */}
-          {[...LOGO_ELEMENTS, ...LOGO_ELEMENTS, ...LOGO_ELEMENTS, ...LOGO_ELEMENTS].map((el, i) => (
+          {/* Ensure the list is long enough to cover large screens comfortably */}
+          {[...LOGO_ELEMENTS, ...LOGO_ELEMENTS, ...LOGO_ELEMENTS].map((el, i) => (
+            <div key={i} className="opacity-80">
+              {el}
+            </div>
+          ))}
+        </motion.div>
+        
+        {/* Identical secondary container for seamless looping */}
+        <motion.div
+          animate={{ x: ["0%", "-100%"] }}
+          transition={{
+            repeat: Infinity,
+            ease: "linear",
+            duration: 30,
+          }}
+          className="flex shrink-0 items-center gap-16 md:gap-24 pr-16 md:pr-24 w-max"
+        >
+          {[...LOGO_ELEMENTS, ...LOGO_ELEMENTS, ...LOGO_ELEMENTS].map((el, i) => (
             <div key={i} className="opacity-80">
               {el}
             </div>

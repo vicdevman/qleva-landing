@@ -1,6 +1,9 @@
 import { Navbar } from "@/components/site/navbar";
 import { Hero } from "@/components/site/hero";
 import { FeaturesTrustedBy } from "@/components/site/features";
+import { SmartAgents } from "@/components/site/smart-agents";
+import { AgentCTA } from "@/components/site/agent-cta";
+import { Footer } from "@/components/site/footer";
 
 export default function Home() {
   return (
@@ -11,6 +14,9 @@ export default function Home() {
       <Navbar />
       <Hero />
       <FeaturesTrustedBy />
+      <SmartAgents />
+      <AgentCTA />
+      <Footer />
     </main>
   );
 }
