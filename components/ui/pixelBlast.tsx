@@ -16,8 +16,9 @@ const createTouchTexture = () => {
   texture.minFilter = THREE.LinearFilter;
   texture.magFilter = THREE.LinearFilter;
   texture.generateMipmaps = false;
-  const trail = [];
-  let last = null;
+  type TrailPoint = { x: number; y: number; age: number; force: number; vx: number; vy: number };
+  const trail: TrailPoint[] = [];
+  let last: { x: number; y: number } | null = null;
   const maxAge = 64;
   let radius = 0.1 * size;
   const speed = 1 / maxAge;
@@ -25,11 +26,11 @@ const createTouchTexture = () => {
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
-  const drawPoint = (p: any) => {
+  const drawPoint = (p: TrailPoint) => {
     const pos = { x: p.x * size, y: (1 - p.y) * size };
     let intensity = 1;
-    const easeOutSine = t => Math.sin((t * Math.PI) / 2);
-    const easeOutQuad = t => -t * (t - 2);
+    const easeOutSine = (t: number) => Math.sin((t * Math.PI) / 2);
+    const easeOutQuad = (t: number) => -t * (t - 2);
     if (p.age < maxAge * 0.3) intensity = easeOutSine(p.age / (maxAge * 0.3));
     else intensity = easeOutQuad(1 - (p.age - maxAge * 0.3) / (maxAge * 0.7)) || 0;
     intensity *= p.force;
@@ -44,7 +45,7 @@ const createTouchTexture = () => {
     ctx.arc(pos.x - offset, pos.y - offset, radius, 0, Math.PI * 2);
     ctx.fill();
   };
-  const addTouch = (norm: any) => {
+  const addTouch = (norm: { x: number; y: number }) => {
     let force = 0;
     let vx = 0;
     let vy = 0;
@@ -360,7 +361,7 @@ const PixelBlast = ({
     const container = containerRef.current;
     if (!container) return;
     speedRef.current = speed;
-    const needsReinitKeys = ['antialias', 'liquid', 'noiseAmount'];
+    const needsReinitKeys = ['antialias', 'liquid', 'noiseAmount'] as const;
     const cfg = { antialias, liquid, noiseAmount };
     let mustReinit = false;
     if (!threeRef.current) mustReinit = true;
@@ -452,9 +453,9 @@ const PixelBlast = ({
         return Math.random();
       };
       const timeOffset = randomFloat() * 1000;
-      let composer;
-      let touch;
-      let liquidEffect;
+      let composer: any = undefined;
+      let touch: any = undefined;
+      let liquidEffect: any = undefined;
       if (liquid) {
         touch = createTouchTexture();
         touch.radiusScale = liquidRadius;
@@ -486,7 +487,7 @@ const PixelBlast = ({
         );
         const noisePass = new EffectPass(camera, noiseEffect);
         noisePass.renderToScreen = true;
-        if (composer && composer.passes.length > 0) composer.passes.forEach(p => (p.renderToScreen = false));
+        if (composer && composer.passes.length > 0) composer.passes.forEach((p: any) => (p.renderToScreen = false));
         composer.addPass(noisePass);
       }
       if (composer) composer.setSize(renderer.domElement.width, renderer.domElement.height);
@@ -503,18 +504,18 @@ const PixelBlast = ({
           h: renderer.domElement.height
         };
       };
-      const onPointerDown = (e: PointerEvent) => {
+      function onPointerDown(e: PointerEvent) {
         const { fx, fy } = mapToPixels(e);
         const ix = threeRef.current?.clickIx ?? 0;
         uniforms.uClickPos.value[ix].set(fx, fy);
         uniforms.uClickTimes.value[ix] = uniforms.uTime.value;
         if (threeRef.current) threeRef.current.clickIx = (ix + 1) % MAX_CLICKS;
-      };
-      const onPointerMove = (e: PointerEvent) => {
+      }
+      function onPointerMove(e: PointerEvent) {
         if (!touch) return;
         const { fx, fy, w, h } = mapToPixels(e);
         touch.addTouch({ x: fx / w, y: fy / h });
-      };
+      }
       renderer.domElement.addEventListener('pointerdown', onPointerDown, {
         passive: true
       });
@@ -534,10 +535,10 @@ const PixelBlast = ({
         if (liquidEffect) liquidEffect.uniforms.get('uTime').value = uniforms.uTime.value;
         if (composer) {
           if (touch) touch.update();
-          composer.passes.forEach(p => {
+          composer.passes.forEach((p: any) => {
             const effs = p.effects;
             if (effs)
-              effs.forEach(eff => {
+              effs.forEach((eff: any) => {
                 const u = eff.uniforms?.get('uTime');
                 if (u) u.value = uniforms.uTime.value;
               });
@@ -547,6 +548,7 @@ const PixelBlast = ({
         raf = requestAnimationFrame(animate);
       };
       raf = requestAnimationFrame(animate);
+      const _handlers = { onPointerDown, onPointerMove };
       threeRef.current = {
         renderer,
         scene,
@@ -561,7 +563,8 @@ const PixelBlast = ({
         timeOffset,
         composer,
         touch,
-        liquidEffect
+        liquidEffect,
+        _handlers
       };
     } else {
       const t = threeRef.current;
@@ -592,11 +595,11 @@ const PixelBlast = ({
       if (!threeRef.current) return;
       const t = threeRef.current;
       try {
-        // remove event listeners
-        t.renderer.domElement.removeEventListener('pointerdown', onPointerDown as any);
-        t.renderer.domElement.removeEventListener('pointermove', onPointerMove as any);
-        window.removeEventListener('pointerdown', onPointerDown as any);
-        window.removeEventListener('pointermove', onPointerMove as any);
+        // remove event listeners via stored handlers
+        t.renderer.domElement.removeEventListener('pointerdown', t._handlers?.onPointerDown as any);
+        t.renderer.domElement.removeEventListener('pointermove', t._handlers?.onPointerMove as any);
+        window.removeEventListener('pointerdown', t._handlers?.onPointerDown as any);
+        window.removeEventListener('pointermove', t._handlers?.onPointerMove as any);
       } catch (err) {
         // ignore
       }

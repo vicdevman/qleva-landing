@@ -188,6 +188,26 @@
       linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
     background-size: 56px 56px;
   }
+
+  /* Marquee utility for horizontal logo strips */
+  .marquee-wrap {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .marquee-track {
+    display: inline-flex;
+    gap: 2.5rem;
+    align-items: center;
+    white-space: nowrap;
+    will-change: transform;
+    animation: marquee 18s linear infinite;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0%); }
+    to { transform: translateX(-50%); }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

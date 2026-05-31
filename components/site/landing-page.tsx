@@ -40,6 +40,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { LogoLoop } from "../ui/logoLoop";
 
 const navItems = ["Product", "Docs", "Security", "Pricing"];
 
@@ -254,19 +255,19 @@ function SectionHeader({
 
 function CTAButtons({ secondary = "See how it works" }: { secondary?: string }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+    <div className="flex flex-wrap items-center justify-center gap-3 ">
       <Button
         asChild
-        className="h-12 rounded-full bg-[#ffce48] px-6 text-sm font-semibold text-[#11100c] hover:bg-[#ffda70]"
+        className="h-11 rounded-lg bg-[#ffce48] px-6 text-sm font-semibold text-[#11100c] hover:bg-[#ffda70]"
       >
-        <Link href="#final-cta">
+        <Link href="https://app.qleva.cloud/" target="_blank" rel="noopener noreferrer">
           Launch App
         </Link>
       </Button>
       <Button
         asChild
         variant="outline"
-        className="h-12 rounded-full border-white/10 bg-white/[0.04] px-6 text-sm font-semibold text-[#f7f4ea] hover:bg-white/[0.08] hover:text-[#f7f4ea]"
+        className="h-11 rounded-lg border-white/10 bg-white/[0.04] px-6 text-sm font-semibold text-[#f7f4ea] hover:bg-white/[0.08] hover:text-[#f7f4ea]"
       >
         <Link href="#how-it-works">{secondary}</Link>
       </Button>
@@ -298,8 +299,8 @@ function Navbar() {
           ))}
         </div>
         <div className="hidden items-center gap-3 md:flex">
-          <Button asChild className="h-9 rounded-full bg-[#ffce48] px-4 text-sm font-semibold text-[#11100c] hover:bg-[#ffda70]">
-            <Link href="#final-cta">Launch App</Link>
+          <Button asChild className="h-9 rounded-xl bg-[#ffce48] px-4 text-sm font-semibold text-[#11100c] hover:bg-[#ffda70]">
+            <Link href="https://app.qleva.cloud/" target="_blank" rel="noopener noreferrer">Launch App</Link>
           </Button>
         </div>
         <button
@@ -320,8 +321,8 @@ function Navbar() {
             </Link>
           ))}
           <Separator className="bg-white/10" />
-          <Button asChild className="h-11 rounded-full bg-[#ffce48] text-[#11100c] hover:bg-[#ffda70]">
-            <Link href="#final-cta" onClick={() => setOpen(false)}>
+          <Button asChild className="h-11 rounded-lg bg-[#ffce48] text-[#11100c] hover:bg-[#ffda70]">
+            <Link href="https://app.qleva.cloud/" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
               Launch App
             </Link>
           </Button>
@@ -385,7 +386,7 @@ function ExecutionPlanCard({ fields, title = "Action: Recurring buy" }: { fields
 
 function HeroConversation() {
   return (
-    <Reveal className="mx-auto mt-14 max-w-[1080px]">
+    <Reveal className="sm:mx-auto px-6 mt-14 max-w-[1080px]">
       <NoiseCard
         width="w-full"
         height="min-h-[560px]"
@@ -393,7 +394,7 @@ function HeroConversation() {
         noiseOpacity={0.055}
         grainSize={2}
         bgColor="bg-[#000]"
-        className="qleva-surface rounded-[32px] p-4 sm:p-6 lg:p-6"
+        className="qleva-surface rounded-[32px]  sm:p-6 lg:p-6"
       >
       <div className="grid h-full min-w-0 gap-5 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
           <div className="flex min-w-0 flex-col justify-between gap-8 rounded-[24px] border border-white/8 bg-[#0c0c0c] p-5 sm:p-7">
@@ -423,7 +424,7 @@ function HeroConversation() {
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden px-0 pb-20 pt-28 sm:px-8 sm:pb-24 sm:pt-32 lg:px-10 lg:pb-32">
+    <section className="relative overflow-hidden px-0 pb-20 pt-30 sm:px-8 sm:pb-24 sm:pt-32 lg:px-10 lg:pb-32">
       {/* <div className="absolute left-1/2 top-24 size-[520px] -translate-x-1/2 rounded-full bg-[#ffce48]/10 blur-[120px]" aria-hidden="true" /> */}
       <div className="absolute inset-x-0 top-0 h-[700px] opacity-30 qleva-grid" aria-hidden="true" />
       <div className="relative mx-auto max-w-[1180px]">
@@ -445,25 +446,41 @@ function HeroSection() {
 }
 
 function TrustBar() {
+  const techLogos = [
+    { src: '/images/Base_lockup_white.png', title: 'Base', href: 'https://base.org', alt: 'Base logo' },
+    { src: '/images/Privy_Brandmark_White.png', title: 'Privy', href: 'https://privy.io', alt: 'Privy logo' },
+    // { src: '/images/dummy.avif', title: 'Groq', href: 'https://groq.com', alt: 'Groq logo' },
+    { src: '/images/alchemy-logo-white.png', title: 'Alchemy', href: 'https://alchemy.com', alt: 'Alchemy logo' }
+  ];
+
   return (
-    <SectionShell className="py-2 sm:py-2">
-      <Reveal className="rounded-[28px] border border-white/8 bg-white/[0.025] p-4">
-        <div className="mb-4 flex flex-col gap-2 px-2 text-center sm:mb-6">
-          <h2 className="text-xl font-semibold text-[#f7f4ea]">Built for controlled execution</h2>
-          <p className="text-sm text-[#b8b4aa]">Every automation starts with a readable plan and ends with your approval.</p>
-        </div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-          {trustItems.map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-3 rounded-2xl border border-white/8 bg-[#141414] p-4">
-              <span className="grid size-9 place-items-center rounded-full bg-[#ffce48]/10 text-[#ffce48]">
-                <Icon aria-hidden="true" />
-              </span>
-              <span className="text-sm font-medium text-[#f7f4ea]">{label}</span>
-            </div>
-          ))}
-        </div>
-      </Reveal>
-    </SectionShell>
+    <section className="py-2 sm:py-2 -mt-6">
+           <SectionHeader
+        eyebrow=""
+        title=""
+        copy="Powered By"
+      />
+      <div style={{ height: '140px', position: 'relative', overflow: 'hidden' }} className="mt-2">
+        <LogoLoop
+          logos={techLogos}
+          speed={80}
+          direction="left"
+          logoHeight={48}
+          gap={40}
+          hoverSpeed={0}
+          scaleOnHover={true}
+          fadeOut
+          fadeOutColor="#0b0b0b"
+          ariaLabel="Technology partners"
+          renderItem={(item: any, key: string) => (
+            <a href={item.href} key={key} target="_blank" rel="noreferrer noopener" className="inline-flex items-center gap-3 rounded px-3 py-2 hover:opacity-90">
+              <img src={item.src} alt={item.alt ?? item.title} className="w-40 opacity-40" />
+              {/* <span className="font-bold font-serif italic text-xl text-[#b8b4aa]">{item.title}</span> */}
+            </a>
+          )}
+        />
+      </div>
+    </section>
   );
 }
 
@@ -492,7 +509,7 @@ function HowItWorksSection() {
       </div>
       <Reveal className="mt-10 flex justify-center">
         <Button asChild className="h-12 rounded-full bg-[#ffce48] px-6 text-[#11100c] hover:bg-[#ffda70]">
-          <Link href="#final-cta">Start with a request</Link>
+          <Link href="https://app.qleva.cloud/" target="_blank" rel="noopener noreferrer">Start with a request</Link>
         </Button>
       </Reveal>
     </SectionShell>
@@ -514,8 +531,8 @@ function UseCasesSection() {
             copy="Set up recurring buys, scheduled transfers, bridges, and portfolio rules without rebuilding the same transaction every time."
           />
           <Reveal className="mt-8 flex justify-start">
-            <Button asChild className="h-12 rounded-full bg-[#ffce48] px-6 text-[#11100c] hover:bg-[#ffda70]">
-              <Link href="#final-cta">Launch App</Link>
+            <Button asChild className="h-12 rounded-lg bg-[#ffce48] px-6 text-[#11100c] hover:bg-[#ffda70]">
+              <Link href="https://app.qleva.cloud/" target="_blank" rel="noopener noreferrer">Launch App</Link>
             </Button>
           </Reveal>
         </div>
@@ -543,12 +560,6 @@ function UseCasesSection() {
               </button>
             </Reveal>
           ))}
-          {/* <Reveal>
-            <div className="qleva-surface rounded-[28px] p-5">
-              <p className="mb-4 text-sm font-semibold text-[#ffce48]">Selected workflow</p>
-              <ExecutionPlanCard fields={selected.plan} title={`Action: ${selected.title}`} />
-            </div>
-          </Reveal> */}
         </div>
       </div>
     </SectionShell>
@@ -748,8 +759,8 @@ function FeatureGridSection() {
         ))}
       </div>
       <Reveal className="mt-10 flex justify-center">
-        <Button asChild className="h-12 rounded-full bg-[#ffce48] px-6 text-[#11100c] hover:bg-[#ffda70]">
-          <Link href="#final-cta">Launch App</Link>
+        <Button asChild className="h-12 rounded-lg bg-[#ffce48] px-6 text-[#11100c] hover:bg-[#ffda70]">
+          <Link href="https://app.qleva.cloud/" target="_blank" rel="noopener noreferrer">Launch App</Link>
         </Button>
       </Reveal>
     </SectionShell>
@@ -796,8 +807,8 @@ function DemoSection() {
         </div>
       </Reveal>
       <Reveal className="mt-8 flex justify-center">
-        <Button asChild className="h-12 rounded-full bg-[#ffce48] px-6 text-[#11100c] hover:bg-[#ffda70]">
-          <Link href="#final-cta">Launch App</Link>
+        <Button asChild className="h-12 rounded-lg bg-[#ffce48] px-6 text-[#11100c] hover:bg-[#ffda70]">
+          <Link href="https://app.qleva.cloud/" target="_blank" rel="noopener noreferrer">Launch App</Link>
         </Button>
       </Reveal>
     </SectionShell>
@@ -863,7 +874,7 @@ function FAQSection() {
 function FinalCTASection() {
   return (
     <section id="final-cta" className="border-t">
-      <Reveal className="relative overflow-hidden rounded-[36px] p-8 text-center sm:p-12 lg:p-16">
+      <Reveal className="relative overflow-hidden p-8 text-center sm:p-12 lg:p-16">
         <div className="absolute left-1/2 top-0 size-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ffce48]/15 blur-[110px]" aria-hidden="true" />
         <div className="relative mx-auto max-w-3xl">
           <h2 className="text-balance text-4xl font-semibold leading-[1.05] text-[#f7f4ea] sm:text-6xl">
@@ -879,10 +890,10 @@ function FinalCTASection() {
             </p>
           </div>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button asChild className="qleva-soft-glow h-12 rounded-full bg-[#ffce48] px-6 text-[#11100c] hover:bg-[#ffda70]">
+            <Button asChild className="qleva-soft-glow h-12 rounded-lg bg-[#ffce48] px-6 text-[#11100c] hover:bg-[#ffda70]">
               <Link href="#">Launch App</Link>
             </Button>
-            <Button asChild variant="outline" className="h-12 rounded-full border-white/10 bg-white/[0.04] px-6 text-[#f7f4ea] hover:bg-white/[0.08] hover:text-[#f7f4ea]">
+            <Button asChild variant="outline" className="h-12 rounded-lg border-white/10 bg-white/[0.04] px-6 text-[#f7f4ea] hover:bg-white/[0.08] hover:text-[#f7f4ea]">
               <Link href="#">View Docs</Link>
             </Button>
           </div>
@@ -904,7 +915,7 @@ function Footer() {
   };
 
   return (
-    <footer className="relative bg-[#050505] rounded-t-3xl px-5 py-14 sm:px-8 lg:px-10 mx-auto max-w-6xl bg-[#141414] border-0 outline-0 ring-0">
+    <footer className="relative z-3000 bg-[#050505] rounded-t-3xl px-5 py-14 sm:px-8 lg:px-10 mx-auto max-w-6xl bg-[#141414] border-0 outline-0 ring-0">
      
        <div className="absolute inset-0 z-0">
             <div style={{ width: '100%', height: '100%', position: 'relative' }}>
