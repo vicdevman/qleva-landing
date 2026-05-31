@@ -98,7 +98,7 @@ const NoiseCard: FC<NoiseCardProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`${width} ${height} ${bgColor} rounded-xl p-8 relative overflow-hidden ${className}`}
+      className={`${width} ${height} ${bgColor} rounded-xl relative overflow-hidden ${className}`}
     >
       <canvas
         ref={canvasRef}

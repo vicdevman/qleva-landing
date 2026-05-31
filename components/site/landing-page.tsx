@@ -26,6 +26,7 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
+import StaggeredMenu from "@/components/ui/starggeredMenu";
 
 import NoiseCard from "@/components/ui/noice-card";
 import PixelBlast from "@/components/ui/pixelBlast";
@@ -42,7 +43,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { LogoLoop } from "../ui/logoLoop";
 
-const navItems = ["Product", "Docs", "Security", "Pricing"];
+const navItems = ["Product", "Docs", "Security"];
 
 const trustItems = [
   { icon: Boxes, label: "Base ecosystem" },
@@ -193,10 +194,10 @@ function Reveal({
   return (
     <motion.div
       className={className}
-      initial={false}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 14, scale: 0.995 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, delay, ease: [0.2, 0.8, 0.2, 1] }}
     >
       {children}
     </motion.div>
@@ -277,8 +278,8 @@ function CTAButtons({ secondary = "See how it works" }: { secondary?: string }) 
 
 function BrandMark() {
   return (
-    <Link href="#" className="flex items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffce48]/60">
-      <Image alt="logo" src="/qleva-brand-kit/qleva-drak.png" width={500} height={500} className="w-7"/>
+    <Link href="#" className="hidden md:flex relative z-200 items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffce48]/60">
+      <Image alt="logo" src="/qleva-brand-kit/qleva-drak.png" width={500} height={500} className="w-6"/>
       <span className="text-xl font-semibold tracking-normal text-[#f7f4ea]">Qleva</span>
     </Link>
   );
@@ -291,9 +292,13 @@ function Navbar() {
     <header className="fixed top-0 mx-auto max-w-6xl w-full left-1/2 z-2000 -translate-x-1/2">
       <nav className="mx-auto flex h-18 items-center justify-between max-w-6xl  px-4">
         <BrandMark />
-        <div className="hidden items-center gap-8 md:flex  backdrop-blur-xl bg-[#090909]/10 p-4 py-3 rounded-lg">
+        <div className="hidden items-center gap-8 md:flex  backdrop-blur-xl bg-[#090909]/10 p-4 -mr-8 py-3 rounded-lg">
           {navItems.map((item) => (
-            <Link key={item} href={item === "Security" ? "#security" : "#product"} className="text-sm text-[#b8b4aa] transition-colors hover:text-[#f7f4ea]">
+            <Link
+              key={item}
+              href={item === 'Security' ? '#security' : item === 'Docs' ? '/docs' : '#product'}
+              className="text-sm text-[#b8b4aa] transition-colors hover:text-[#f7f4ea]"
+            >
               {item}
             </Link>
           ))}
@@ -303,31 +308,23 @@ function Navbar() {
             <Link href="https://app.qleva.cloud/" target="_blank" rel="noopener noreferrer">Launch App</Link>
           </Button>
         </div>
-        <button
-          type="button"
-          aria-label="Toggle navigation"
-          aria-expanded={open}
-          onClick={() => setOpen((value) => !value)}
-          className="grid size-9 place-items-center rounded-full border  border-white/10 bg-white/[0.04] text-[#f7f4ea] md:hidden"
-        >
-          {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-        </button>
-      </nav>
-      {open ? (
-        <div className="mx-auto mt-3 flex max-w-[1180px] flex-col gap-2 rounded-3xl border border-white/10 bg-[#101010]/95 p-4 backdrop-blur-xl md:hidden">
-          {navItems.map((item) => (
-            <Link key={item} href={item === "Security" ? "#security" : "#product"} className="rounded-2xl px-3 py-3 text-sm text-[#f7f4ea]" onClick={() => setOpen(false)}>
-              {item}
-            </Link>
-          ))}
-          <Separator className="bg-white/10" />
-          <Button asChild className="h-11 rounded-lg bg-[#ffce48] text-[#11100c] hover:bg-[#ffda70]">
-            <Link href="https://app.qleva.cloud/" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
-              Launch App
-            </Link>
-          </Button>
+        <div className="md:hidden">
+          <StaggeredMenu
+            isFixed={true}
+            menuButtonColor="#f7f4ea"
+            openMenuButtonColor="#ffce48"
+            logoUrl="/qleva-brand-kit/qleva-drak.png"
+            items={navItems.map((item) => ({
+              label: item,
+              link: item === 'Security' ? '#security' : item === 'Product' ? '#product' : item === 'Docs' ? '/docs' : '#'
+            }))}
+            socialItems={[{ label: 'Twitter', link: 'https://twitter.com' }, { label: 'GitHub', link: 'https://github.com' }]}
+            displayItemNumbering={false}
+            className="sm-scope"
+          />
         </div>
-      ) : null}
+      </nav>
+      {/* StaggeredMenu handles its own panel for mobile; nothing else needed here */}
     </header>
   );
 }
@@ -368,7 +365,7 @@ function ExecutionPlanCard({ fields, title = "Action: Recurring buy" }: { fields
         {planFields.map((field, index) => (
           <motion.div
             key={`${field.label}-${field.value}`}
-            initial={false}
+            initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 + index * 0.07, duration: 0.35 }}
           >
@@ -386,18 +383,18 @@ function ExecutionPlanCard({ fields, title = "Action: Recurring buy" }: { fields
 
 function HeroConversation() {
   return (
-    <Reveal className="sm:mx-auto px-6 mt-14 max-w-[1080px]">
+    <Reveal className="sm:mx-auto px-4 mt-14 max-w-[1080px]">
       <NoiseCard
         width="w-full"
-        height="min-h-[560px]"
+        height="min-h-[360px] sm:min-h-[500px]"
         animated={false}
         noiseOpacity={0.055}
         grainSize={2}
         bgColor="bg-[#000]"
-        className="qleva-surface rounded-[32px]  sm:p-6 lg:p-6"
+        className="qleva-surface rounded-4xl p-3 sm:p-6 lg:p-6 flex items-center justify-center"
       >
       <div className="grid h-full min-w-0 gap-5 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
-          <div className="flex min-w-0 flex-col justify-between gap-8 rounded-[24px] border border-white/8 bg-[#0c0c0c] p-5 sm:p-7">
+          <div className="flex min-w-0 flex-col gap-6 sm:justify-between sm:gap-8 rounded-[24px] border border-white/8 bg-[#0c0c0c] p-5 sm:p-7">
             <div className="flex flex-col gap-4">
               <Badge variant="outline" className="w-fit border-white/10 bg-white/[0.04] text-[#b8b4aa]">
                 User request
@@ -424,11 +421,11 @@ function HeroConversation() {
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden px-0 pb-20 pt-30 sm:px-8 sm:pb-24 sm:pt-32 lg:px-10 lg:pb-32">
+    <section className="relative overflow-hidden px-0 pb-12 pt-30 sm:px-8 sm:pb-24 sm:pt-32 lg:px-10 lg:pb-32">
       {/* <div className="absolute left-1/2 top-24 size-[520px] -translate-x-1/2 rounded-full bg-[#ffce48]/10 blur-[120px]" aria-hidden="true" /> */}
       <div className="absolute inset-x-0 top-0 h-[700px] opacity-30 qleva-grid" aria-hidden="true" />
       <div className="relative mx-auto max-w-[1180px]">
-        <Reveal className="mx-auto flex max-w-[880px] flex-col items-center gap-6 text-center">
+        <Reveal className="mx-auto flex max-w-[880px] flex-col items-center gap-4 text-center">
           <h1 className="max-w-full text-balance text-[38px] font-semibold leading-[1.06] tracking-normal text-[#f7f4ea] min-[420px]:text-[42px] sm:text-6xl lg:text-[72px]">
             Automate crypto actions with{" "}
             <span className="block font-serif italic text-[#b8b4aa] sm:inline">conversation</span>
@@ -455,11 +452,11 @@ function TrustBar() {
 
   return (
     <section className="py-2 sm:py-2 -mt-6">
-           <SectionHeader
+           {/* <SectionHeader
         eyebrow=""
         title=""
         copy="Powered By"
-      />
+      /> */}
       <div style={{ height: '140px', position: 'relative', overflow: 'hidden' }} className="mt-2">
         <LogoLoop
           logos={techLogos}
@@ -474,7 +471,7 @@ function TrustBar() {
           ariaLabel="Technology partners"
           renderItem={(item: any, key: string) => (
             <a href={item.href} key={key} target="_blank" rel="noreferrer noopener" className="inline-flex items-center gap-3 rounded px-3 py-2 hover:opacity-90">
-              <img src={item.src} alt={item.alt ?? item.title} className="w-40 opacity-40" />
+              <img src={item.src} alt={item.alt ?? item.title} className="w-30 sm:w-40 opacity-40" />
               {/* <span className="font-bold font-serif italic text-xl text-[#b8b4aa]">{item.title}</span> */}
             </a>
           )}
@@ -915,7 +912,7 @@ function Footer() {
   };
 
   return (
-    <footer className="relative z-3000 bg-[#050505] rounded-t-3xl px-5 py-14 sm:px-8 lg:px-10 mx-auto max-w-6xl bg-[#141414] border-0 outline-0 ring-0">
+    <footer className="relative z-10 bg-[#050505] rounded-t-3xl px-5 py-14 sm:px-8 lg:px-10 mx-auto max-w-6xl bg-[#141414] border-0 outline-0 ring-0">
      
        <div className="absolute inset-0 z-0">
             <div style={{ width: '100%', height: '100%', position: 'relative' }}>
@@ -964,7 +961,7 @@ function Footer() {
           </div>
         </div>
         <Reveal className="mt-16 overflow-hidden flex gap-6  items-center justify-center">
-          <Image alt="logo" src="/qleva-brand-kit/qleva-drak.png" width={120} height={120} />
+          <Image alt="logo" src="/qleva-brand-kit/qleva-drak.png" width={100} height={100} />
           <div className="font-serif text-[22vw] italic text-[#b8b4aa] font-medium leading-none tracking-normal  opacity-95 sm:text-[18vw] lg:text-[180px]">
             Qleva
           </div>
