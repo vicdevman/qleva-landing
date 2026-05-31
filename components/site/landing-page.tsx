@@ -843,7 +843,7 @@ function FAQSection() {
         <Accordion type="single" collapsible defaultValue="item-0" className="gap-1">
           {faqs.map(([question, answer], index) => (
             <AccordionItem key={question} value={`item-${index}`} className="border-white/8">
-              <AccordionTrigger className="rounded-2xl px-4 py-5 text-base font-semibold text-[#f7f4ea] no-underline hover:bg-white/[0.035] hover:no-underline">
+              <AccordionTrigger className="rounded-xl px-4 py-5 text-base font-semibold text-[#f7f4ea] no-underline hover:bg-white/[0.035] hover:no-underline">
                 {question}
               </AccordionTrigger>
               <AccordionContent className="px-4 pb-5 text-sm leading-7 text-[#b8b4aa]">{answer}</AccordionContent>
@@ -862,7 +862,7 @@ function FAQSection() {
 
 function FinalCTASection() {
   return (
-    <section id="final-cta">
+    <section id="final-cta" className="border-t">
       <Reveal className="relative overflow-hidden rounded-[36px] p-8 text-center sm:p-12 lg:p-16">
         <div className="absolute left-1/2 top-0 size-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ffce48]/15 blur-[110px]" aria-hidden="true" />
         <div className="relative mx-auto max-w-3xl">
@@ -904,7 +904,7 @@ function Footer() {
   };
 
   return (
-    <footer className="relative bg-[#050505] px-5 py-14 sm:px-8 lg:px-10 mx-auto max-w-6xl bg-[#141414] border-0 outline-0 ring-0">
+    <footer className="relative bg-[#050505] rounded-t-3xl px-5 py-14 sm:px-8 lg:px-10 mx-auto max-w-6xl bg-[#141414] border-0 outline-0 ring-0">
      
        <div className="absolute inset-0 z-0">
             <div style={{ width: '100%', height: '100%', position: 'relative' }}>
