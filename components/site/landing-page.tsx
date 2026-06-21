@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   Activity,
   ArrowRight,
@@ -18,6 +18,7 @@ import {
   LockKeyhole,
   Menu,
   Pause,
+  Plus,
   Repeat2,
   ShieldCheck,
   SlidersHorizontal,
@@ -30,12 +31,6 @@ import StaggeredMenu from "@/components/ui/starggeredMenu";
 
 import NoiseCard from "@/components/ui/noice-card";
 import PixelBlast from "@/components/ui/pixelBlast";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -139,13 +134,6 @@ const featureCards = [
   ["Pause and revoke", "Stay in control after setup.", Pause],
 ] as const;
 
-const comparisonRows = [
-  ["Setup style", "Rebuild every action", "Configure strategies", "Tune controls", "Describe the outcome"],
-  ["Transparency", "Scattered across apps", "Often opaque", "Visible but complex", "Readable plan first"],
-  ["Approval control", "Every transaction", "Varies by bot", "Manual controls", "Human approval gates"],
-  ["Recurring actions", "Manual repetition", "Strategy-focused", "Configuration-heavy", "Built for routines"],
-  ["User effort", "High", "Hard to audit", "High setup cost", "Low, with clear limits"],
-];
 
 const faqs = [
   [
@@ -245,7 +233,7 @@ function SectionHeader({
           {eyebrow}
         </Badge>
       ) : null}
-      <h2 className="max-w-4xl text-balance text-3xl font-medium leading-[1.05] tracking-normal text-[#f7f4ea] sm:text-5xl lg:text-[54px]">
+      <h2 className="max-w-4xl text-balance text-4xl font-medium leading-[1.05] tracking-normal text-[#f7f4ea] sm:text-6xl lg:text-[62px]">
         {title}
         {italic ? <span className="font-serif italic text-[#b8b4aa]"> {italic}</span> : null}
       </h2>
@@ -304,7 +292,7 @@ function Navbar() {
           ))}
         </div>
         <div className="hidden items-center gap-3 md:flex">
-          <Button asChild className="h-9 rounded-xl bg-[#ffce48] px-4 text-sm font-semibold text-[#11100c] hover:bg-[#ffda70]">
+          <Button asChild className="h-9 rounded-lg bg-[#ffce48] px-4 text-sm font-semibold text-[#11100c] hover:bg-[#ffda70]">
             <Link href="https://app.qleva.cloud/" target="_blank" rel="noopener noreferrer">Launch App</Link>
           </Button>
         </div>
@@ -423,7 +411,7 @@ function HeroSection() {
   return (
     <section className="relative overflow-hidden px-0 pb-12 pt-30 sm:px-8 sm:pb-24 sm:pt-32 lg:px-10 lg:pb-32">
       {/* <div className="absolute left-1/2 top-24 size-[520px] -translate-x-1/2 rounded-full bg-[#ffce48]/10 blur-[120px]" aria-hidden="true" /> */}
-      <div className="absolute inset-x-0 top-0 h-[700px] opacity-30 qleva-grid" aria-hidden="true" />
+      {/* <div className="absolute inset-x-0 top-0 h-[700px] opacity-30 qleva-grid" aria-hidden="true" /> */}
       <div className="relative mx-auto max-w-[1180px]">
         <Reveal className="mx-auto flex max-w-[880px] flex-col items-center gap-4 text-center">
           <h1 className="max-w-full text-balance text-[38px] font-semibold leading-[1.06] tracking-normal text-[#f7f4ea] min-[420px]:text-[42px] sm:text-6xl lg:text-[72px]">
@@ -812,6 +800,70 @@ function DemoSection() {
   );
 }
 
+const comparisonCards = [
+  // {
+  //   title: "Manual DeFi",
+  //   gradient: "from-white/[0.02] to-transparent",
+  //   border: "border-white/5",
+  //   badge: null,
+  //   textColor: "text-[#f7f4ea]",
+  //   isQleva: false,
+  //   features: [
+  //     { label: "Setup style", value: "Rebuild every action" },
+  //     { label: "Transparency", value: "Scattered across apps" },
+  //     { label: "Approval control", value: "Every transaction" },
+  //     { label: "Recurring actions", value: "Manual repetition" },
+  //     { label: "User effort", value: "High" },
+  //   ],
+  // }, 
+   {
+    title: "Dashboards",
+    gradient: "from-white/[0.02] to-transparent",
+    border: "border-white/5",
+    badge: null,
+    textColor: "text-[#f7f4ea]",
+    isQleva: false,
+    features: [
+      { label: "Setup style", value: "Tune controls" },
+      { label: "Transparency", value: "Visible but complex" },
+      { label: "Approval control", value: "Manual controls" },
+      { label: "Recurring actions", value: "Configuration-heavy" },
+      { label: "User effort", value: "High setup cost" },
+    ],
+  },
+  {
+    title: "Trading bots",
+    gradient: "from-white/[0.02] to-transparent",
+    border: "border-white/5",
+    badge: null,
+    textColor: "text-[#f7f4ea]",
+    isQleva: false,
+    features: [
+      { label: "Setup style", value: "Configure strategies" },
+      { label: "Transparency", value: "Often opaque" },
+      { label: "Approval control", value: "Varies by bot" },
+      { label: "Recurring actions", value: "Strategy-focused" },
+      { label: "User effort", value: "Hard to audit" },
+    ],
+  },
+
+  {
+    title: "Qleva",
+    gradient: "from-[#ffce48]/12 via-[#ffce48]/2 to-transparent",
+    border: "border-[#ffce48]/30",
+    badge: "Recommended",
+    textColor: "text-[#ffce48]",
+    isQleva: true,
+    features: [
+      { label: "Setup style", value: "Describe the outcome" },
+      { label: "Transparency", value: "Readable plan first" },
+      { label: "Approval control", value: "Human approval gates" },
+      { label: "Recurring actions", value: "Built for routines" },
+      { label: "User effort", value: "Low, with clear limits" },
+    ],
+  },
+];
+
 function ComparisonSection() {
   return (
     <SectionShell>
@@ -819,24 +871,85 @@ function ComparisonSection() {
         title="Not a bot. Not another dashboard."
         copy="Qleva gives you automation without hiding the details or forcing you through manual DeFi steps every time."
       />
-      <Reveal className="mt-14 overflow-hidden rounded-[28px] border border-white/8 bg-[#141414]">
-        <div className="grid min-w-[860px] grid-cols-[1.05fr_1fr_1fr_1fr_1fr]">
-          {["", "Manual DeFi", "Trading bots", "Dashboards", "Qleva"].map((heading) => (
-            <div key={heading || "empty"} className={cn("border-b border-white/8 p-4 text-sm font-semibold", heading === "Qleva" ? "bg-[#ffce48]/10 text-[#ffce48]" : "text-[#f7f4ea]")}>
-              {heading}
-            </div>
-          ))}
-          {comparisonRows.map((row) =>
-            row.map((cell, index) => (
-              <div key={`${row[0]}-${cell}-${index}`} className={cn("border-b border-white/8 p-4 text-sm leading-6", index === 0 ? "font-semibold text-[#f7f4ea]" : "text-[#b8b4aa]", index === 4 && "bg-[#ffce48]/10 text-[#f7f4ea]")}>
-                {cell}
+      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {comparisonCards.map((card) => (
+          <Reveal
+            key={card.title}
+            className={cn(
+              "relative rounded-[28px] border bg-[#141414] p-6 flex flex-col justify-between overflow-hidden transition-all duration-300",
+              card.border,
+              // card.isQleva ? "shadow-[0_20px_50px_rgba(255,206,72,0.06)]" : ""
+            )}
+          >
+            <div className={cn("absolute inset-0 bg-gradient-to-b -z-10 pointer-events-none", card.gradient)} />
+
+            <div>
+              <div className="flex items-center justify-between mb-8">
+                <h3 className={cn("text-xl font-bold tracking-tight", card.textColor)}>
+                  {card.title}
+                </h3>
+                {card.badge && (
+                  <Badge className="border-[#ffce48]/25 bg-[#ffce48]/10 text-[#ffce48] hover:bg-[#ffce48]/15 transition-colors" variant="outline">
+                    {card.badge}
+                  </Badge>
+                )}
               </div>
-            ))
-          )}
-        </div>
-      </Reveal>
-      <Reveal className="mt-5 text-center text-sm text-[#77736b]">Compare the flow</Reveal>
+
+              <div className="flex flex-col gap-5">
+                {card.features.map((feature, idx) => (
+                  <div key={idx} className="flex flex-col gap-1.5 border-t border-white/5 pt-4 first:border-0 first:pt-0">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#77736b]">
+                      {feature.label}
+                    </span>
+                    <span className={cn("text-[14px] leading-relaxed font-medium", card.isQleva ? "text-[#f7f4ea]" : "text-[#b8b4aa]")}>
+                      {feature.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
     </SectionShell>
+  );
+}
+
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border-b border-white/8 py-1.5">
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between py-5 text-left text-[#f7f4ea] hover:text-[#ffce48] transition-colors focus:outline-none"
+      >
+        <span className="text-base sm:text-lg font-medium pr-8 leading-snug">{question}</span>
+        <motion.span
+          animate={{ rotate: isOpen ? 45 : 0 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          className="text-[#b8b4aa] shrink-0"
+        >
+          <Plus className="h-5 w-5" />
+        </motion.span>
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+            className="overflow-hidden"
+          >
+            <div className="pb-5 text-sm sm:text-base leading-relaxed text-[#b8b4aa] pr-6">
+              {answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
@@ -847,19 +960,14 @@ function FAQSection() {
         title="Questions worth asking before automating crypto"
         copy="Qleva is built for users who want convenience without losing control."
       />
-      <Reveal className="mx-auto mt-12 max-w-[860px] rounded-[28px] border border-white/8 bg-[#141414] p-4 sm:p-6">
-        <Accordion type="single" collapsible defaultValue="item-0" className="gap-1">
-          {faqs.map(([question, answer], index) => (
-            <AccordionItem key={question} value={`item-${index}`} className="border-white/8">
-              <AccordionTrigger className="rounded-xl px-4 py-5 text-base font-semibold text-[#f7f4ea] no-underline hover:bg-white/[0.035] hover:no-underline">
-                {question}
-              </AccordionTrigger>
-              <AccordionContent className="px-4 pb-5 text-sm leading-7 text-[#b8b4aa]">{answer}</AccordionContent>
-            </AccordionItem>
+      <Reveal className="mx-auto mt-12 max-w-[800px] w-full">
+        <div className="flex flex-col">
+          {faqs.map(([question, answer]) => (
+            <FAQItem key={question} question={question} answer={answer} />
           ))}
-        </Accordion>
+        </div>
       </Reveal>
-      <Reveal className="mt-8 flex justify-center">
+      <Reveal className="mt-12 flex justify-center">
         <Button asChild variant="outline" className="h-12 rounded-full border-white/10 bg-white/[0.04] px-6 text-[#f7f4ea] hover:bg-white/[0.08] hover:text-[#f7f4ea]">
           <Link href="#">Read docs</Link>
         </Button>
@@ -914,7 +1022,7 @@ function Footer() {
   return (
     <footer className="relative z-10 bg-[#050505] rounded-t-3xl px-5 py-14 sm:px-8 lg:px-10 mx-auto max-w-6xl bg-[#141414] border-0 outline-0 ring-0">
      
-       <div className="absolute inset-0 z-0">
+       <div className="absolute inset-0 z-0 pointer-events-none">
             <div style={{ width: '100%', height: '100%', position: 'relative' }}>
               <PixelBlast
                 variant="square"
@@ -961,7 +1069,7 @@ function Footer() {
           </div>
         </div>
         <Reveal className="mt-16 overflow-hidden flex gap-6  items-center justify-center">
-          <Image alt="logo" src="/qleva-brand-kit/qleva-drak.png" width={100} height={100} />
+          <Image alt="logo" src="/qleva-brand-kit/qleva-drak.png" width={500} height={500} className="lg:w-30 w-20 md:w-25 h-auto " />
           <div className="font-serif text-[22vw] italic text-[#b8b4aa] font-medium leading-none tracking-normal  opacity-95 sm:text-[18vw] lg:text-[180px]">
             Qleva
           </div>
@@ -975,7 +1083,7 @@ export default function LandingPage() {
   return (
     <main className="min-h-screen bg-[#090909] text-[#3a2e0e] text-[#f7f4ea]">
       <Navbar />
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 pointer-events-none">
             <div style={{ width: '100%', height: '100%', position: 'relative' }}>
               <PixelBlast
                 variant="square"
