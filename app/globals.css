@@ -33,6 +33,10 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-surface-alt: var(--surface-alt);
+  --color-muted-ink: var(--muted-ink);
+  --color-accent-ink: var(--accent-ink);
+  --color-footer-bg: var(--footer-bg);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -47,7 +51,7 @@
 }
 
 :root {
-  --card: oklch(1 0 0);
+  --card: oklch(0.99 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
@@ -79,6 +83,20 @@
   --sidebar-ring: oklch(0.708 0 0);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+  /* The alternating section background. */
+  --surface-alt: oklch(0.985 0 0);
+  /* The dimmest readable label text. */
+  --muted-ink: oklch(0.62 0 0);
+  /*
+   * Brand colour for TEXT, as opposed to fills.
+   *
+   * --primary is #ffce48. Correct as dark text on a yellow button, and roughly
+   * 1.6:1 as text on white — where 4.5:1 is the floor. Same hue, taken far
+   * enough down in lightness to be readable.
+   */
+  --accent-ink: oklch(0.52 0.13 68);
+  /* The footer plate. Sits distinct from the page, not level with it. */
+  --footer-bg: oklch(0.97 0 0);
 }
 
 .dark {
@@ -113,6 +131,13 @@
   --sidebar-accent-foreground: #f7f4ea;
   --sidebar-border: rgba(255, 255, 255, 0.08);
   --sidebar-ring: oklch(0.556 0 0);
+  /* Exactly the literals the landing page used, so dark is unchanged. */
+  --surface-alt: #0c0c0c;
+  --muted-ink: #77736b;
+  /* On near-black the brand yellow is ~11:1 — it needs no adjustment. */
+  --accent-ink: #ffce48;
+  /* #050505 — the literal the footer carried before, restored as a token. */
+  --footer-bg: #050505;
 }
 
 @layer base {
@@ -166,20 +191,33 @@
     font-family: var(--font-serif), ui-serif, Georgia, serif;
   }
 
+  /*
+   * The raised card surface.
+   *
+   * Was three hardcoded dark values — a #141414 fill, white hairlines and a
+   * heavy black shadow — so in light mode it rendered a dark card floating on
+   * a white page. Driven by tokens it is the same card in dark (the sheen and
+   * the fill resolve to the identical colours) and a light card with a real
+   * border in light, where a white-on-white hairline would have shown nothing.
+   */
   .qleva-surface {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
-      #141414;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 24px 70px rgba(0, 0, 0, 0.24);
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--foreground) 5.5%, transparent),
+        color-mix(in srgb, var(--foreground) 1.8%, transparent)
+      ),
+      var(--card);
+    border: 1px solid var(--border);
+    /* box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--foreground) 8%, transparent),
+      0 24px 70px color-mix(in srgb, var(--foreground) 8%, transparent); */
   }
 
   .qleva-soft-glow {
-    box-shadow:
+    /* box-shadow:
       0 0 0 1px rgba(255, 206, 72, 0.18),
-      0 18px 80px rgba(255, 206, 72, 0.12);
+      0 18px 80px rgba(255, 206, 72, 0.12); */
   }
 
   .qleva-grid {

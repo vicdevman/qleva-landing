@@ -32,15 +32,15 @@ function Reveal({
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-[#090909] text-[#f7f4ea] relative overflow-hidden flex flex-col justify-between">
+    <main className="min-h-screen bg-background text-foreground relative overflow-hidden flex flex-col justify-between">
       <Lines />
 
       {/* Brand logo at the top */}
       <header className="absolute top-0 left-0 w-full z-20">
         <div className="mx-auto max-w-6xl px-4 h-18 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffce48]/60">
+          <Link href="/" className="flex items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60">
             <Image alt="logo" src="/qleva-brand-kit/qleva-drak.png" width={500} height={500} className="w-6"/>
-            <span className="text-xl font-semibold tracking-normal text-[#f7f4ea]">Qleva</span>
+            <span className="text-xl font-semibold tracking-normal text-foreground">Qleva</span>
           </Link>
         </div>
       </header>
@@ -75,13 +75,13 @@ export default function NotFound() {
       <div className="relative z-10 mx-auto w-full max-w-[1180px] px-5 pt-32 pb-20 sm:px-8 lg:px-10 flex-1 flex flex-col justify-center items-center">
         <div className="max-w-2xl text-center flex flex-col items-center gap-6">
           <Reveal delay={0.05}>
-            <Badge variant="outline" className="border-[#ffce48]/25 bg-[#ffce48]/10 text-[#ffce48] px-3 py-1 text-xs">
+            <Badge variant="outline" className="border-primary/25 bg-primary/10 text-accent-ink px-3 py-1 text-xs">
               Error 404
             </Badge>
           </Reveal>
           
           <Reveal delay={0.1}>
-            <h1 className="text-7xl font-bold tracking-tighter text-[#ffce48] sm:text-9xl">
+            <h1 className="text-7xl font-bold tracking-tighter text-accent-ink sm:text-9xl">
               404
             </h1>
           </Reveal>
@@ -89,23 +89,23 @@ export default function NotFound() {
           <Reveal delay={0.15}>
             <h2 className="text-3xl font-semibold sm:text-5xl">
               Lost in the{" "}
-              <span className="font-serif italic text-[#b8b4aa]">blocks</span>?
+              <span className="font-serif italic text-muted-foreground">blocks</span>?
             </h2>
           </Reveal>
 
           <Reveal delay={0.2}>
-            <p className="max-w-md text-base leading-7 text-[#b8b4aa]">
+            <p className="max-w-md text-base leading-7 text-muted-foreground">
               This block or strategy doesn't exist yet. The path you followed might have been simulated incorrectly, or the page has moved.
             </p>
           </Reveal>
 
           <Reveal delay={0.25} className="flex flex-wrap items-center justify-center gap-4 mt-4">
-            <Button asChild className="h-11 rounded-lg bg-[#ffce48] px-6 text-sm font-semibold text-[#11100c] hover:bg-[#ffda70]">
+            <Button asChild className="h-11 rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground hover:bg-primary/90">
               <Link href="/">
                 <Home className="mr-2 h-4 w-4" /> Go to Safety
               </Link>
             </Button>
-            <Button asChild variant="outline" className="h-11 rounded-lg border-white/10 bg-white/[0.04] px-6 text-sm font-semibold text-[#f7f4ea] hover:bg-white/[0.08] hover:text-[#f7f4ea]">
+            <Button asChild variant="outline" className="h-11 rounded-lg border-white/10 bg-white/[0.04] px-6 text-sm font-semibold text-foreground hover:bg-white/[0.08] hover:text-foreground">
               <Link href="https://app.qleva.cloud/" target="_blank" rel="noopener noreferrer">
                 Launch App <Sparkles className="ml-2 h-4 w-4" />
               </Link>
@@ -115,7 +115,7 @@ export default function NotFound() {
       </div>
 
       {/* Simple Footer */}
-      <footer className="relative z-10 py-8 border-t border-white/5 text-center text-xs text-[#77736b]">
+      <footer className="relative z-10 py-8 border-t border-white/5 text-center text-xs text-muted-ink">
         &copy; {new Date().getFullYear()} Qleva. All rights reserved.
       </footer>
     </main>
