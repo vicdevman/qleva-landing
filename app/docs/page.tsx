@@ -31,7 +31,7 @@ function Navbar() {
           {navItems.map((item) => (
             <Link
               key={item}
-              href={item === 'Security' ? '/#security' : item === 'Docs' ? '/docs' : '/#product'}
+              href={item === 'Security' ? '/security' : item === 'Docs' ? '/docs' : '/#product'}
               className={`text-sm transition-colors hover:text-foreground ${item === 'Docs' ? 'text-accent-ink font-medium' : 'text-muted-foreground'}`}
             >
               {item}
@@ -51,7 +51,7 @@ function Navbar() {
             logoUrl="/qleva-brand-kit/qleva-drak.png"
             items={navItems.map((item) => ({
               label: item,
-              link: item === 'Security' ? '/#security' : item === 'Product' ? '/#product' : item === 'Docs' ? '/docs' : '/'
+              link: item === 'Security' ? '/security' : item === 'Product' ? '/#product' : item === 'Docs' ? '/docs' : '/'
             }))}
             socialItems={[{ label: 'Twitter', link: 'https://twitter.com' }, { label: 'GitHub', link: 'https://github.com' }]}
             displayItemNumbering={false}

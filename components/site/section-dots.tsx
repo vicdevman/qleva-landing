@@ -110,7 +110,7 @@ export function SectionDots({ className }: { className?: string }) {
           row was painted underneath them, which is why it looked like it had
           not rendered at all.
         */
-        "pointer-events-none fixed inset-x-0 top-[52px] z-1500 flex justify-center px-4 sm:top-[64px]",
+        "pointer-events-none fixed inset-x-0 top-[52px] z-1500 md:flex justify-center px-4 sm:top-[64px] hidden",
         className,
       )}
     >

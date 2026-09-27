@@ -56,11 +56,11 @@ export const SITE_KEYWORDS = [
 export const SECTIONS = [
   { id: "how-it-works", label: "How it works" },
   { id: "product", label: "Use cases" },
-  { id: "showcase", label: "In practice" },
+  // { id: "showcase", label: "In practice" },
   { id: "security", label: "Security" },
-  { id: "portfolio", label: "Portfolio" },
-  { id: "features", label: "Features" },
-  { id: "demo", label: "Demo" },
-  { id: "comparison", label: "Compare" },
+  // { id: "portfolio", label: "Portfolio" },
+  // { id: "features", label: "Features" },
+  // { id: "demo", label: "Demo" },
+  // { id: "comparison", label: "Compare" },
   { id: "faq", label: "FAQ" },
 ] as const;

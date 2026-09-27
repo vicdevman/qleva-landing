@@ -107,7 +107,7 @@
   --popover: #141414;
   --popover-foreground: #f7f4ea;
   --primary: #ffce48;
-  --primary-foreground: #11100c;
+  --primary-foreground: oklch(0.421 0.095 57.708);
   --secondary: #171717;
   --secondary-foreground: #f7f4ea;
   --muted: #1c1c1c;
